@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String @unique @db.VarChar(20)
+  password String @default("xxx") @db.VarChar(100)
+  //join해서 가져오는것
+  phone    Phone? //프리즈마가 알아서 가져옴
+  posts    Post[]
+  comments comment[]
+}
+
+model Phone {
+  id          Int    @id @default(autoincrement())
+  phoneNumber String @unique @db.Char(13)
+  user        User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int?   @unique
+}
+
+//블로그 만들기
+//post, comment 글, 댓글
+
+//1사용자 -> 여러 post, comment
+//1post -> 여러 comment
+
+model Post {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(30)
+  content String @db.Text
+  authorId Int 
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments comment[]
+}
+
+model comment {
+  id Int @id @default(autoincrement())
+  content String @db.VarChar(100)
+  authorId Int
+  postId Int
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
