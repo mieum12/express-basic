@@ -69,6 +69,6 @@ export class UserService {
       throw new Error("회원이 존재하지 않음");
     }
     // (2)회원 DB에서 삭제(이제 무조건 회원인 경우)
-    await userRepository.remove(id);
+    await userRepository.delete(id);
   }
 }

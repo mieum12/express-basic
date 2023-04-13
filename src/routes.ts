@@ -13,7 +13,7 @@ userRouter.get("/user/:id", userController.getUser);
 userRouter.get("/users", userController.getAllUsers);
 userRouter.post("/login", userController.login);
 userRouter.post("/signup", userController.signup);
-userRouter.delete("/users", userController.withdraw);
+userRouter.delete("/users/:id", userController.withdraw);
 // userRouter.put("/users", userController.update);
 
 postRouter.post("/posts", postController.write);

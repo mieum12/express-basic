@@ -79,7 +79,6 @@ export class PostController {
   //5.모든 블로그 글 가져오기
   async getAll(req: Request, res: Response) {
     //문자열을 숫자로
-    // const MyId: number = parseInt(req.params.postId);
     const { myId } = req.body;
 
     try {

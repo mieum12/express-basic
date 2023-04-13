@@ -89,9 +89,9 @@ export class UserRepository {
   }
 
   // 4. 사용자 삭제
-  async remove(id: number) {
+  async delete(id: number) {
     // prismaUser.remove(id);
-    const user = await client.user.delete({
+    await client.user.delete({
       where: { id },
     });
   }
