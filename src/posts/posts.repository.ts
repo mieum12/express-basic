@@ -42,8 +42,8 @@ export class PostRepository {
         id: "asc",
       },
       //pagenation 10개씩 가져올거다
-      skip: 10,
-      take: 10,
+      // skip: 10,
+      // take: 10,
     });
     return posts;
   }
